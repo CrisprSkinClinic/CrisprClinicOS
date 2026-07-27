@@ -1,0 +1,67 @@
+---
+// src/pages/index.astro
+//
+// Landing page for the staff-tools repo's root (crisprclinicos.netlify.app).
+// This repo has no public-facing content -- just a small directory
+// linking to the four real staff tools, since visiting the bare
+// domain previously 404'd (nothing was ever mapped to "/"). No auth
+// gate here since it holds no data itself, just static links; each
+// tool linked below still requires its own real sign-in.
+import AppLayout from '../layouts/AppLayout.astro';
+
+const tools = [
+  {
+    name: 'Pharmacy',
+    href: '/pharmacy',
+    description: 'Checkout, inventory, purchase orders, and invoice reconciliation.',
+  },
+  {
+    name: 'Prescription',
+    href: '/prescription',
+    description: "Doctor's queue, prescription writing, and PDF generation.",
+  },
+  {
+    name: 'Bookings Manager',
+    href: '/bookings-manager',
+    description: 'Appointments, patient registration, payments, and cash sessions.',
+  },
+  {
+    name: 'Staff Admin',
+    href: '/staff-admin',
+    description: 'Content management for the public site (blog posts, pages).',
+  },
+];
+---
+
+<AppLayout title="CRISPR Staff Tools" description="Internal tools directory">
+  <div class="min-h-screen bg-warmwhite flex items-center justify-center p-6">
+    <div class="w-full max-w-2xl">
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 rounded-xl bg-brand-900 flex items-center justify-center mx-auto mb-4">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+        </div>
+        <h1 class="text-2xl font-bold text-brand-900 tracking-tight">CRISPR Staff Tools</h1>
+        <p class="text-sm text-charcoal/50 mt-1">Internal tools for CRISPR Skin and Hair Clinic staff.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        {tools.map((tool) => (
+          <a
+            href={tool.href}
+            class="group bg-white rounded-2xl border border-champagne-200 shadow-sm p-5 hover:border-brand-300 hover:shadow-md transition-all"
+          >
+            <div class="w-10 h-10 rounded-lg bg-champagne-100 group-hover:bg-brand-900 flex items-center justify-center mb-3 transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-700 group-hover:text-white transition-colors"><circle cx="12" cy="12" r="9"/></svg>
+            </div>
+            <h2 class="font-bold text-brand-900 text-sm mb-1">{tool.name}</h2>
+            <p class="text-xs text-charcoal/50 leading-relaxed">{tool.description}</p>
+          </a>
+        ))}
+      </div>
+
+      <p class="text-center text-xs text-charcoal/30 mt-8">
+        Each tool requires its own sign-in. Not seeing something you need? Contact your administrator.
+      </p>
+    </div>
+  </div>
+</AppLayout>
